@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Validators
 {
-    internal class AutomovilEntityValidator : EntityValidator<Automovil>
+    internal class AutomovilEntityValidator : EntityValidator<Automóvil>
     {
     }
 }
