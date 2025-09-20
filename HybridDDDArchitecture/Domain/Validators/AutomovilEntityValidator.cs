@@ -8,7 +8,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Validators
 {
-    internal class AutomovilEntityValidator : EntityValidator<Automóvil>
+    /// <summary>
+    /// Creacion del validador de la entidad Automovil para las obligaciones, lo que si o si debe tener el automovil a la hora
+    /// de generarlo, es decir donde definímos las reglas de negocio para validar la entidad.
+    /// </summary>
+    public class AutomovilValidator : EntityValidator<Automovil>
     {
+
     }
 }
