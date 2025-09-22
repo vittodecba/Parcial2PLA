@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    internal class Automovil : DomainEntity<string, AutomovilEntityValidator>
+    internal  class Automovil : DomainEntity<string, AutomovilEntityValidator>
     {
         public int IdAuto { get; set; }
         public string Marca { get; set; }

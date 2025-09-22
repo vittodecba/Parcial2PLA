@@ -4,6 +4,7 @@ using Core.Infraestructure;
 using Domain.Others.Utils;
 using Infrastructure.Constants;
 using Infrastructure.Factories;
+using Infrastructure.Repositories.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,8 @@ namespace Infrastructure.Registrations
 
             /* Adapters */
             services.AddSingleton<IExternalApiClient, ExternalApiHttpAdapter>();
+
+            services.AddTransient<IAutomovilRepository, AutomovilRepository>();
 
             return services;
         }
