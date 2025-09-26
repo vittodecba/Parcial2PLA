@@ -1,37 +1,52 @@
-﻿using Application.Constants;
-using Application.DomainEvents;
+﻿// HANDLER
+using Application.Constants;
 using Application.DomainEvents.Auomovil;
 using Application.Exceptions;
 using Application.Repositories;
 using Core.Application;
 using Domain.Entities;
 using MediatR;
-using System.Threading;
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 {
-    public class UpdateAutomovilCommandHandler(ICommandQueryBus domainbus , IAutomovilRepository context) : IRequestHandler<UpdateAutomovilCommand>
+    public sealed class UpdateAutomovilCommandHandler
+        : IRequestCommandHandler<UpdateAutomovilCommand>
     {
-        private readonly IAutomovilRepository _automovilRepository = context ?? throw new ArgumentNullException(nameof(context));
-        private readonly ICommandQueryBus _domainbus = domainbus ?? throw new ArgumentNullException(nameof(domainbus));
+        private readonly IAutomovilRepository _automovilRepository;
+        private readonly ICommandQueryBus _domainbus;
 
-        public async Task Handle(UpdateAutomovilCommand request, CancellationToken cancellationToken)
+        public UpdateAutomovilCommandHandler(ICommandQueryBus domainbus, IAutomovilRepository repo)
         {
-            Automovil entity = await _automovilRepository.FindOneAsync(request.Id) ?? throw new ArgumentNullException(nameof(request));
-            entity.setcolor(request.Color);
-            entity.setnumeromotor(request.NumeroMotor);
+            _domainbus = domainbus ?? throw new ArgumentNullException(nameof(domainbus));
+            _automovilRepository = repo ?? throw new ArgumentNullException(nameof(repo));
+        }
 
+        public async Task<Automovil> Handle(UpdateAutomovilCommand request, CancellationToken cancellationToken)
+        {
+            var entity = await _automovilRepository.FindOneAsync(request.ID)
+                         ?? throw new InvalidEntityDataException("Automóvil no encontrado");
+
+            entity.setcolor(request.Color);
+            if (!string.IsNullOrWhiteSpace(request.NumeroMotor))
+                entity.setnumeromotor(request.NumeroMotor);
 
             try
             {
-                _automovilRepository.Update(request.Id, entity);
-                await _domainbus.Publish(entity.To<AutomovilEntityUpdate>(), cancellationToken);
+                _automovilRepository.Update(request.ID, entity); // si no es async, llamá Update y quitá await
+                await _domainbus.Publish(new AutomovilEntityUpdate(entity.Id), cancellationToken);
+                return entity;
             }
             catch (Exception ex)
             {
-                throw new BussinessException(ApplicationConstants.PROCESS_EXECUTION_EXCEPTION, ex.InnerException);
+                throw new BussinessException(ApplicationConstants.PROCESS_EXECUTION_EXCEPTION, ex);
             }
         }
+
+       
+
+       
+
+      
 
         Task IRequestHandler<UpdateAutomovilCommand>.Handle(UpdateAutomovilCommand request, CancellationToken cancellationToken)
         {

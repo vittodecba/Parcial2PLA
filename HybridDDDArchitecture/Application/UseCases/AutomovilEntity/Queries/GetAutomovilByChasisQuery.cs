@@ -8,6 +8,6 @@ namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Queries
     public class GetAutomovilByChasisQuery : IRequest<AutomovilDto>
     {
         [Required]
-        public string NumeroChasis { get; set; }
+        public string NUMEROCHASIS { get; set; }
     }
 }

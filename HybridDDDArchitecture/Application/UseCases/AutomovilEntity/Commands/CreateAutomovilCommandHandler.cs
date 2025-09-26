@@ -4,13 +4,14 @@ using Application.DomainEvents;
 using Application.DomainEvents.Auomovil;
 using Application.Exceptions;
 using Application.Repositories;
+using Application.UseCases.AutomovilEntity.Commands.CreateDummyEntity;
 using Core.Application;
 using Domain.Entities;
 using MediatR;
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 {
-    public class CreateAutomovilCommandHandler(ICommandQueryBus domain ,IAutomovilRepository repo ,IAutomovilApplivationService servicio ) : IRequestHandler<CreateAutomovilCommand, Automovil>
+    public class CreateAutomovilCommandHandler(ICommandQueryBus domain ,IAutomovilRepository repo ,IAutomovilApplivationService servicio ) : IRequestCommandHandler<CreateAutomovilCommand, string>
     {
         private readonly IAutomovilRepository _automovilRepository = repo ?? throw new ArgumentNullException(nameof(repo));
         private readonly IAutomovilApplivationService service = servicio ?? throw new ArgumentNullException( nameof(servicio));
@@ -41,9 +42,6 @@ namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 
         }
 
-        Task<Automovil> IRequestHandler<CreateAutomovilCommand, Automovil>.Handle(CreateAutomovilCommand request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

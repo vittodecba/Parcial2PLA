@@ -23,16 +23,16 @@ namespace Domain.Entities
         public string Numero_Motor { get; set; }
         public string Numero_Chasis { get; set; }
 
-        public Automovil(string marca , string modelo , string color , string Año,string motor,string chasis )
+        public Automovil(string marca , string modelo , string color , string año_Fabrcacion, string numero_Motor, string numero_Chasis)
 
         {
             IdAuto = Guid.NewGuid().ToString();
             Marca = marca;
             Modelo = modelo;
             Color = color;
-            Año_Fabrcacion = Año;
-            Numero_Motor = motor;
-            Numero_Chasis = chasis;
+            Año_Fabrcacion = año_Fabrcacion;
+            Numero_Motor = numero_Motor;
+            Numero_Chasis = numero_Chasis;
 
         
         

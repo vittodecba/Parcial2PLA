@@ -1,4 +1,6 @@
-﻿using Core.Application;
+﻿// COMMAND
+using Core.Application;
+using Domain.Entities;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,18 +8,8 @@ namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 {
     public class UpdateAutomovilCommand : IRequestCommand
     {
-        [Required]
-        public string Id { get; set; }
-        [Required]
-        public string Color { get; set; }
-        
-        public string NumeroMotor { get; set; }
-
-        public UpdateAutomovilCommand()
-        {
-            
-        }
-
-
+        [Required] public string ID { get; set; }
+        [Required] public string Color { get; set; }
+        public string? NumeroMotor { get; set; }
     }
 }

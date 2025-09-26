@@ -1,10 +1,11 @@
-﻿using Domain.Entities;
+﻿using Core.Application;
+using Domain.Entities;
 using MediatR;
 
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 {
-    public class CreateAutomovilCommand : IRequest<Automovil>
+    public class CreateAutomovilCommand : IRequestCommand<string>
     {
         public string Marca { get; set; }
         public string Modelo { get; set; }

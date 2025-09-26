@@ -21,20 +21,35 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.DummyEntity", b =>
+            modelBuilder.Entity("Domain.Entities.Automovil", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("DummyPropertyOne")
+                    b.Property<string>("Año_Fabrcacion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DummyPropertyTwo")
-                        .HasColumnType("int");
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdAuto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Marca")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Modelo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Numero_Chasis")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Numero_Motor")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("DummyEntity", (string)null);
+                    b.ToTable("Automovil", (string)null);
                 });
 #pragma warning restore 612, 618
         }

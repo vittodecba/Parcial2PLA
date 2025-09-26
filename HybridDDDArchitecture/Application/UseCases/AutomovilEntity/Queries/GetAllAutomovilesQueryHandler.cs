@@ -9,7 +9,7 @@ namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Queries
 {
     public class GetAllAutomovilesQueryHandler(IAutomovilRepository context): IRequestHandler<GetAllAutomovilesQuery, QueryResult<AutomovilDto>>
     {
-        private readonly IAutomovilRepository _automovilRepository;
+        private readonly IAutomovilRepository _automovilRepository =context ?? throw new ArgumentNullException(nameof(context));
 
        
 

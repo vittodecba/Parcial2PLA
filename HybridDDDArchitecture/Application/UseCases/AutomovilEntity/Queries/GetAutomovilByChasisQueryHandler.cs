@@ -17,7 +17,7 @@ namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Queries
 
         public async Task<Automovil> Handle(GetAutomovilByChasisQuery request, CancellationToken cancellationToken)
         {
-            var automovil = await _automovilRepository.GetByChasisAync(request.NumeroChasis) ?? throw new EntityDoesNotExistException();
+            var automovil = await _automovilRepository.GetByChasisAync(request.NUMEROCHASIS) ?? throw new EntityDoesNotExistException();
             return automovil;
         }
 

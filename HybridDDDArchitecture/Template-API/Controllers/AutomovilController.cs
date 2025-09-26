@@ -28,7 +28,7 @@ public class AutomovilController(ICommandQueryBus domain) : Controller
     {
         if (string.IsNullOrEmpty(id)) return BadRequest();
 
-        var entity = await _domain.Send(new GetAutomovilByIdQuery { Id = id });
+        var entity = await _domain.Send(new GetAutomovilByIdQuery { ID = id });
 
         return Ok(entity);
     }
@@ -38,7 +38,7 @@ public class AutomovilController(ICommandQueryBus domain) : Controller
     {
         if (string.IsNullOrEmpty(chasis)) return BadRequest();
 
-        var entity = await _domain.Send(new GetAutomovilByChasisQuery { NumeroChasis = chasis });
+        var entity = await _domain.Send(new GetAutomovilByChasisQuery { NUMEROCHASIS = chasis });
 
         return Ok(entity);
     }
@@ -58,7 +58,7 @@ public class AutomovilController(ICommandQueryBus domain) : Controller
     {
         if (id == null) return BadRequest();
 
-        await _domain.Send(new DeleteAutomovilCommand { Id = id });
+        await _domain.Send(new DeleteAutomovilCommand { ID = id });
 
         return NoContent();
     }

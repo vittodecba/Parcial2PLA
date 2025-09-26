@@ -1,27 +1,32 @@
-﻿using Application.DomainEvents;
+﻿// HANDLER
 using Application.DomainEvents.Auomovil;
 using Application.Repositories;
+using Application.UseCases.DummyEntity.Commands.DeleteDummyEntity;
 using Core.Application;
 using MediatR;
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 {
-    public class DeleteAutomovilCommandHandler(ICommandQueryBus domain , IAutomovilRepository repo) : IRequestHandler<DeleteAutomovilCommand>
+    public sealed class DeleteAutomovilCommandHandler
+        : IRequestCommandHandler<DeleteDummyEntityCommand, Unit>
     {
-        private readonly IAutomovilRepository _automovilRepository=repo ?? throw new ArgumentNullException(nameof(repo));
-        private readonly ICommandQueryBus _domainbus = domain ?? throw new ArgumentNullException(nameof(domain));
+        private readonly IAutomovilRepository _automovilRepository;
+        private readonly ICommandQueryBus _domainbus;
 
-       
-
-        public  Task<Unit> Handle(DeleteAutomovilCommand request, CancellationToken cancellationToken)
+        public DeleteAutomovilCommandHandler(ICommandQueryBus domain, IAutomovilRepository repo)
         {
-             _automovilRepository.Remove(request.Id);
-            _domainbus.Publish(new AutomovilDelete(request.Id), cancellationToken);
-            return  Unit.Task;
-
+            _domainbus = domain ?? throw new ArgumentNullException(nameof(domain));
+            _automovilRepository = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
-        Task IRequestHandler<DeleteAutomovilCommand>.Handle(DeleteAutomovilCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteAutomovilCommand request, CancellationToken cancellationToken)
+        {
+             _automovilRepository.Remove(request.ID); // si es sync: _automovilRepository.Remove(request.Id);
+            await _domainbus.Publish(new AutomovilDelete(request.ID), cancellationToken);
+            return Unit.Value;
+        }
+
+        public Task<Unit> Handle(DeleteDummyEntityCommand request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
