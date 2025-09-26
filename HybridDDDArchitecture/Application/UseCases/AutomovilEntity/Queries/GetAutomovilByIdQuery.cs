@@ -1,12 +1,13 @@
 ﻿using MediatR;
 using Domain.Entities;
 using System.ComponentModel.DataAnnotations;
+using Application.DataTransferObjects;
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Queries
 {
-    public class GetAutomovilByIdQuery : IRequest<Automovil>
+    public class GetAutomovilByIdQuery : IRequest<AutomovilDto>
     {
         [Required]
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 }

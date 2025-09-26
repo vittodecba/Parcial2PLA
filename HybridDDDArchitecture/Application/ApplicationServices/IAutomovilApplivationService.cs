@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.ApplicationServices
 {
-    internal interface IAutomovilApplivationService
+    public  interface IAutomovilApplivationService
     {
-        bool Automovil(object value);
+        bool AutomovilExist(object value);
     }
 }

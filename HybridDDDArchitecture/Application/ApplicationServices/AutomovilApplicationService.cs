@@ -11,7 +11,8 @@ namespace Application.ApplicationServices
         
     {
         private readonly IAutomovilRepository _context = context ?? throw new ArgumentNullException(nameof(context));
-        public bool Automovil(object value)
+      
+        public bool AutomovilExist(object value)
         {
             throw new NotImplementedException();
         }

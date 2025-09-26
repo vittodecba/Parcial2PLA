@@ -1,21 +1,24 @@
-﻿using Application.Repositories;
+﻿using Application.DomainEvents;
+using Application.DomainEvents.Auomovil;
+using Application.Repositories;
+using Core.Application;
 using MediatR;
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 {
-    public class DeleteAutomovilCommandHandler : IRequestHandler<DeleteAutomovilCommand>
+    public class DeleteAutomovilCommandHandler(ICommandQueryBus domain , IAutomovilRepository repo) : IRequestHandler<DeleteAutomovilCommand>
     {
-        private readonly IAutomovilRepository _automovilRepository;
+        private readonly IAutomovilRepository _automovilRepository=repo ?? throw new ArgumentNullException(nameof(repo));
+        private readonly ICommandQueryBus _domainbus = domain ?? throw new ArgumentNullException(nameof(domain));
 
-        public DeleteAutomovilCommandHandler(IAutomovilRepository automovilRepository)
-        {
-            _automovilRepository = automovilRepository;
-        }
+       
 
-        public async Task<Unit> Handle(DeleteAutomovilCommand request, CancellationToken cancellationToken)
+        public  Task<Unit> Handle(DeleteAutomovilCommand request, CancellationToken cancellationToken)
         {
              _automovilRepository.Remove(request.Id);
-            return Unit.Value;
+            _domainbus.Publish(new AutomovilDelete(request.Id), cancellationToken);
+            return  Unit.Task;
+
         }
 
         Task IRequestHandler<DeleteAutomovilCommand>.Handle(DeleteAutomovilCommand request, CancellationToken cancellationToken)

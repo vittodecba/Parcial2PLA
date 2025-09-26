@@ -13,19 +13,19 @@ namespace Domain.Entities
 {
     public   class Automovil : DomainEntity<string, AutomovilValidator>
     {
-        public string IdAuto { get; set; }
+        public string  IdAuto { get; set; }
 
         public string Marca { get; set; }
         public string Modelo { get; set; }
 
         public string Color { get; set; }
-        public DateTime Año_Fabrcacion { get; set; }
+        public string Año_Fabrcacion { get; set; }
         public string Numero_Motor { get; set; }
         public string Numero_Chasis { get; set; }
 
-        public Automovil(string marca , string modelo , string color , DateTime Año,string motor,string chasis )
+        public Automovil(string marca , string modelo , string color , string Año,string motor,string chasis )
 
-        { 
+        {
             IdAuto = Guid.NewGuid().ToString();
             Marca = marca;
             Modelo = modelo;

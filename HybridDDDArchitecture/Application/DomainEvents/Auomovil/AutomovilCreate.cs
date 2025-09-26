@@ -1,10 +1,13 @@
-﻿using Domain.Entities;
-using MediatR;
+﻿using Core.Application;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-
-namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
+namespace Application.DomainEvents.Auomovil
 {
-    public class CreateAutomovilCommand : IRequest<Automovil>
+    public class AutomovilCreate :DomainEvent
     {
         public string Marca { get; set; }
         public string Modelo { get; set; }

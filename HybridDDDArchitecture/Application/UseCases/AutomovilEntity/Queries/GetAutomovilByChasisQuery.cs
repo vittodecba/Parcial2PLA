@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using Domain.Entities;
 using System.ComponentModel.DataAnnotations;
+using Application.DataTransferObjects;
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Queries
 {
-    public class GetAutomovilByChasisQuery : IRequest<Automovil>
+    public class GetAutomovilByChasisQuery : IRequest<AutomovilDto>
     {
         [Required]
         public string NumeroChasis { get; set; }
