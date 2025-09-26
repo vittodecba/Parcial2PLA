@@ -11,13 +11,43 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    internal  class Automovil : DomainEntity<string, AutomovilEntityValidator>
+    public   class Automovil : DomainEntity<string, AutomovilValidator>
     {
-        public int IdAuto { get; set; }
+        public string IdAuto { get; set; }
+
         public string Marca { get; set; }
         public string Modelo { get; set; }
-        public int Año_Fabrcacion { get; set; }
-        public int Numero_Motor { get; set; }
-        public int Numero_Chasis { get; set; }
+
+        public string Color { get; set; }
+        public DateTime Año_Fabrcacion { get; set; }
+        public string Numero_Motor { get; set; }
+        public string Numero_Chasis { get; set; }
+
+        public Automovil(string marca , string modelo , string color , DateTime Año,string motor,string chasis )
+
+        { 
+            IdAuto = Guid.NewGuid().ToString();
+            Marca = marca;
+            Modelo = modelo;
+            Color = color;
+            Año_Fabrcacion = Año;
+            Numero_Motor = motor;
+            Numero_Chasis = chasis;
+
+        
+        
+        
+        }
+
+        public void setcolor(string color)
+        {
+            Color = color;
+
+        }
+
+        public void setnumeromotor(string numero)
+        {
+            Numero_Motor = numero;
+        }
     }
 }

@@ -1,8 +1,5 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Application.Repositories;
-using HybridDODArchitecture.Application.Repositories;
-using HybridDODArchitecture.Domain.Entities;
+﻿using Application.Repositories;
+using Domain.Entities;
 using MediatR;
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Queries
@@ -18,7 +15,7 @@ namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Queries
 
         public async Task<Automovil> Handle(GetAutomovilByIdQuery request, CancellationToken cancellationToken)
         {
-            var automovil = await _automovilRepository.GetByIdAsync(request.Id);
+            var automovil = await _automovilRepository.FindOneAsync(request.Id);
             return automovil;
         }
     }

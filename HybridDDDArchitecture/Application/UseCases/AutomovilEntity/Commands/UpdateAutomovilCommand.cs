@@ -1,16 +1,18 @@
 ﻿using MediatR;
-using HybridDODArchitecture.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 {
     public class UpdateAutomovilCommand : IRequest
     {
+        [Required]
         public int Id { get; set; }
-        public string Marca { get; set; }
-        public string Modelo { get; set; }
+        [Required]
         public string Color { get; set; }
-        public int Fabricacion { get; set; }
+        
         public string NumeroMotor { get; set; }
-        public string NumeroChasis { get; set; }
+
+       
+       
     }
 }

@@ -13,5 +13,6 @@ namespace Application.Repositories
     public interface IAutomovilRepository : IRepository<Automovil>
     {
         Task<Automovil> GetByChasisAync(string numeroChasis);
+        Task<IEnumerable<Automovil>> GetallAsync();
     }
 }

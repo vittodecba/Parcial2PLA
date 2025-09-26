@@ -1,6 +1,7 @@
 ﻿using Application.Repositories;
 using Core.Infraestructure.Repositories.Sql;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,9 @@ namespace Infrastructure.Repositories.Sql
 {
     internal sealed class AutomovilRepository(StoreDbContext context) : BaseRepository<Automovil>(context), IAutomovilRepository
     {
-        public Task<Automovil> GetByChasisAync(string numeroChasis)
+        public async Task<Automovil> GetByChasisAync(string numeroChasis)
         {
-            // Agrega la lógica de consulta a la base de datos acá 
-            throw new NotImplementedException();
+         return await Context.Set<Automovil>().FirstOrDefaultAsync(a => a.Numero_Chasis== numeroChasis);
         }
     }
 }

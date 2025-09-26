@@ -1,8 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Application.Repositories;
-using HybridDODArchitecture.Application.Repositories;
-using HybridDODArchitecture.Domain.Entities;
+﻿using Application.Repositories;
 using MediatR;
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
@@ -18,8 +14,13 @@ namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 
         public async Task<Unit> Handle(DeleteAutomovilCommand request, CancellationToken cancellationToken)
         {
-            await _automovilRepository.DeleteAsync(request.Id);
+             _automovilRepository.Remove(request.Id);
             return Unit.Value;
+        }
+
+        Task IRequestHandler<DeleteAutomovilCommand>.Handle(DeleteAutomovilCommand request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

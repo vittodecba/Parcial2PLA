@@ -1,34 +1,41 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using Application.Constants;
+using Application.DomainEvents;
+using Application.DomainEvents.Auomovil;
+using Application.Exceptions;
 using Application.Repositories;
-using HybridDODArchitecture.Application.Repositories;
-using HybridDODArchitecture.Domain.Entities;
+using Core.Application;
+using Domain.Entities;
 using MediatR;
+using System.Threading;
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 {
-    public class UpdateAutomovilCommandHandler : IRequestHandler<UpdateAutomovilCommand>
+    public class UpdateAutomovilCommandHandler(ICommandQueryBus domainbus , IAutomovilRepository context) : IRequestHandler<UpdateAutomovilCommand>
     {
-        private readonly IAutomovilRepository _automovilRepository;
+        private readonly IAutomovilRepository _automovilRepository = context ?? throw new ArgumentNullException(nameof(context));
+        private readonly ICommandQueryBus _domainbus = domainbus ?? throw new ArgumentNullException(nameof(domainbus));
 
-        public UpdateAutomovilCommandHandler(IAutomovilRepository automovilRepository)
+        public async Task Handle(UpdateAutomovilCommand request, CancellationToken cancellationToken)
         {
-            _automovilRepository = automovilRepository;
+            Automovil entity = await _automovilRepository.FindOneAsync(request.Id) ?? throw new ArgumentNullException(nameof(request));
+            entity.setcolor(request.Color);
+            entity.setnumeromotor(request.NumeroMotor);
+
+
+            try
+            {
+                _automovilRepository.Update(request.Id, entity);
+                await _domainbus.Publish(entity.To<AutomovilEntityUpdate>(), cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                throw new BussinessException(ApplicationConstants.PROCESS_EXECUTION_EXCEPTION, ex.InnerException);
+            }
         }
 
-        public async Task<Unit> Handle(UpdateAutomovilCommand request, CancellationToken cancellationToken)
+        Task IRequestHandler<UpdateAutomovilCommand>.Handle(UpdateAutomovilCommand request, CancellationToken cancellationToken)
         {
-            var automovil = await _automovilRepository.GetByIdAsync(request.Id);
-
-            automovil.Marca = request.Marca;
-            automovil.Modelo = request.Modelo;
-            automovil.Color = request.Color;
-            automovil.Fabricacion = request.Fabricacion;
-            automovil.NumeroMotor = request.NumeroMotor;
-            automovil.NumeroChasis = request.NumeroChasis;
-
-            await _automovilRepository.UpdateAsync(automovil);
-            return Unit.Value;
+            throw new NotImplementedException();
         }
     }
 }

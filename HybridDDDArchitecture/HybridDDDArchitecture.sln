@@ -21,21 +21,26 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Infraestructure.Reposi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Domain", "Core.Domain\Core.Domain.csproj", "{7C878F20-BB69-4EF4-AF69-4540EEA5F246}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template-API", "Template-API\Template-API.csproj", "{84BFB037-3F3D-EBC4-5394-EC960187A5C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Template-API", "Template-API\Template-API.csproj", "{84BFB037-3F3D-EBC4-5394-EC960187A5C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{F80C4E72-27A0-12B5-0634-DD5C11CFB0C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{F80C4E72-27A0-12B5-0634-DD5C11CFB0C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{E528BBC3-1C26-8C35-F682-23718816ADCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{E528BBC3-1C26-8C35-F682-23718816ADCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5872AEB3-BAA3-FE31-B0EB-0FB6DBEDCF83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5872AEB3-BAA3-FE31-B0EB-0FB6DBEDCF83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Application.EventBus", "Core.Application.EventBus\Core.Application.EventBus.csproj", "{CA99B4C1-DC3A-4A3E-BFED-AC0271FA96EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Application.EventBus", "Core.Application.EventBus\Core.Application.EventBus.csproj", "{CA99B4C1-DC3A-4A3E-BFED-AC0271FA96EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Infraestructure.EventBus.RabbitMq", "Core.Infraestructure.EventBus.RabbitMq\Core.Infraestructure.EventBus.RabbitMq.csproj", "{F0442312-F60A-4658-8214-C9A77B632FBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Infraestructure.EventBus.RabbitMq", "Core.Infraestructure.EventBus.RabbitMq\Core.Infraestructure.EventBus.RabbitMq.csproj", "{F0442312-F60A-4658-8214-C9A77B632FBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Application.Adapters.Http", "Core.Application.Adapters\Core.Application.Adapters.Http.csproj", "{CBF01E98-C064-42A2-9249-6843FC5D6752}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Application.Adapters.Http", "Core.Application.Adapters\Core.Application.Adapters.Http.csproj", "{CBF01E98-C064-42A2-9249-6843FC5D6752}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Infraestructure.Adapters.Http", "Core.Infraestructure.Adapters.Http\Core.Infraestructure.Adapters.Http.csproj", "{A26C2E47-9907-41F3-B8DF-593EA97056BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Infraestructure.Adapters.Http", "Core.Infraestructure.Adapters.Http\Core.Infraestructure.Adapters.Http.csproj", "{A26C2E47-9907-41F3-B8DF-593EA97056BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "carpeta", "carpeta", "{CF003640-3FF5-4775-8BF2-E34DD31FF085}"
+	ProjectSection(SolutionItems) = preProject
+		Class1.cs = Class1.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -118,6 +123,7 @@ Global
 		{F0442312-F60A-4658-8214-C9A77B632FBA} = {78ED68F3-7383-442C-8878-E9D54DFF4677}
 		{CBF01E98-C064-42A2-9249-6843FC5D6752} = {78ED68F3-7383-442C-8878-E9D54DFF4677}
 		{A26C2E47-9907-41F3-B8DF-593EA97056BD} = {78ED68F3-7383-442C-8878-E9D54DFF4677}
+		{CF003640-3FF5-4775-8BF2-E34DD31FF085} = {78ED68F3-7383-442C-8878-E9D54DFF4677}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A579D3FB-B958-47E4-8ADB-D5F1E98FB5FF}

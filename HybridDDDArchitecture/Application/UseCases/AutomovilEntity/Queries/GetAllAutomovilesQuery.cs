@@ -1,6 +1,5 @@
 ﻿using MediatR;
-using HybridDODArchitecture.Domain.Entities;
-using System.Collections.Generic;
+using Domain.Entities;
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Queries
 {

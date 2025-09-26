@@ -1,20 +1,16 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using Application.ApplicationServices;
 using Application.Repositories;
-using HybridDODArchitecture.Application.Repositories;
-using HybridDODArchitecture.Domain.Entities;
+using Core.Application;
+using Domain.Entities;
 using MediatR;
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 {
-    public class CreateAutomovilCommandHandler : IRequestHandler<CreateAutomovilCommand, Automovil>
+    public class CreateAutomovilCommandHandler(ICommandQueryBus domain ,IAutomovilRepository repo ,IAutomovilApplivationService servicio ) : IRequestHandler<CreateAutomovilCommand, Automovil>
     {
         private readonly IAutomovilRepository _automovilRepository;
 
-        public CreateAutomovilCommandHandler(IAutomovilRepository automovilRepository)
-        {
-            _automovilRepository = automovilRepository;
-        }
+       
 
         public async Task<Automovil> Handle(CreateAutomovilCommand request, CancellationToken cancellationToken)
         {
@@ -22,10 +18,10 @@ namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
             {
                 Marca = request.Marca,
                 Modelo = request.Modelo,
-                Color = request.Color,
-                Fabricacion = request.Fabricacion,
-                NumeroMotor = request.NumeroMotor,
-                NumeroChasis = request.NumeroChasis
+                color = request.Color,
+                Año_Fabrcacion = request.Fabricacion,
+                Numero_Motor = request.NumeroMotor,
+                Numero_Chasis = request.NumeroChasis
             };
 
             await _automovilRepository.AddAsync(automovil);
