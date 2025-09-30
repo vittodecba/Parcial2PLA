@@ -23,6 +23,7 @@ namespace Application.Mappings
             CreateMap<Automovil, AutomovilDto>().ReverseMap();
             // arriba ya tenés otros CreateMap...
             CreateMap<Automovil, AutomovilDto>().ReverseMap();
+            CreateMap<Automovil, AutomovilDto>().ReverseMap();
 
 
         }

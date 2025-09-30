@@ -1,29 +1,25 @@
 ﻿using Application.DataTransferObjects;
 using Application.Exceptions;
 using Application.Repositories;
-using Domain.Entities;
+using Core.Application;
 using MediatR;
 
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Queries
 {
-    public class GetAutomovilByChasisQueryHandler : IRequestHandler<GetAutomovilByChasisQuery, AutomovilDto>
+    public class GetAutomovilByChasisQueryHandler
+        : IRequestHandler<GetAutomovilByChasisQuery, AutomovilDto>
     {
         private readonly IAutomovilRepository _automovilRepository;
 
         public GetAutomovilByChasisQueryHandler(IAutomovilRepository automovilRepository)
-        {
-            _automovilRepository = automovilRepository;
-        }
+            => _automovilRepository = automovilRepository;
 
-        public async Task<Automovil> Handle(GetAutomovilByChasisQuery request, CancellationToken cancellationToken)
+        public async Task<AutomovilDto> Handle(GetAutomovilByChasisQuery request, CancellationToken cancellationToken)
         {
-            var automovil = await _automovilRepository.GetByChasisAync(request.NUMEROCHASIS) ?? throw new EntityDoesNotExistException();
-            return automovil;
-        }
+            var automovil = await _automovilRepository.GetByChasisAync(request.NUMEROCHASIS)
+                             ?? throw new EntityDoesNotExistException();
 
-        Task<AutomovilDto> IRequestHandler<GetAutomovilByChasisQuery, AutomovilDto>.Handle(GetAutomovilByChasisQuery request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
+            return CustomMapper.Instance.Map<AutomovilDto>(automovil);
         }
     }
 }

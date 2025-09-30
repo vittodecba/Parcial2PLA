@@ -34,7 +34,7 @@ public class AutomovilController(ICommandQueryBus domain) : BaseController
         return Ok(entity);
     }
 
-    [HttpGet("api/v1/[Controller]/chasis/{Chasis}")]
+    [HttpGet("chasis/{chasis}")]
     public async Task<IActionResult> GetByChasis(string chasis)
     {
         if (string.IsNullOrEmpty(chasis)) return BadRequest();
