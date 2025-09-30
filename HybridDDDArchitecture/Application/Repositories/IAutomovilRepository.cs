@@ -14,5 +14,8 @@ namespace Application.Repositories
     {
         Task<Automovil> GetByChasisAync(string numeroChasis);
         Task<IEnumerable<Automovil>> GetallAsync();
+        Task<bool> ExistsByChasisAsync(string numeroChasis);
+        Task<bool> ExistsByMotorAsync(string numeroMotor);
+
     }
 }

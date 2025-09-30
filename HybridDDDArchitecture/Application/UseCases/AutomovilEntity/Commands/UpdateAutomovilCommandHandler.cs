@@ -10,7 +10,7 @@ using MediatR;
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 {
     public sealed class UpdateAutomovilCommandHandler
-        : IRequestCommandHandler<UpdateAutomovilCommand>
+        : IRequestCommandHandler<UpdateAutomovilCommand,Automovil>
     {
         private readonly IAutomovilRepository _automovilRepository;
         private readonly ICommandQueryBus _domainbus;
@@ -48,9 +48,6 @@ namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 
       
 
-        Task IRequestHandler<UpdateAutomovilCommand>.Handle(UpdateAutomovilCommand request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

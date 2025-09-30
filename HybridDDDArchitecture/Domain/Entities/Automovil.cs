@@ -13,7 +13,7 @@ namespace Domain.Entities
 {
     public   class Automovil : DomainEntity<string, AutomovilValidator>
     {
-        public string  IdAuto { get; set; }
+        public string IdAuto { get; set; }
 
         public string Marca { get; set; }
         public string Modelo { get; set; }
@@ -26,7 +26,8 @@ namespace Domain.Entities
         public Automovil(string marca , string modelo , string color , string año_Fabrcacion, string numero_Motor, string numero_Chasis)
 
         {
-            IdAuto = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid().ToString();
+            IdAuto =Id;
             Marca = marca;
             Modelo = modelo;
             Color = color;

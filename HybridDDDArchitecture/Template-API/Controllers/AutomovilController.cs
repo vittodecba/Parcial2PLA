@@ -3,15 +3,16 @@ using Application.UseCases.DummyEntity.Commands.DeleteDummyEntity;
 using Application.UseCases.DummyEntity.Commands.UpdateDummyEntity;
 using Application.UseCases.DummyEntity.Queries.GetAllDummyEntities;
 using Application.UseCases.DummyEntity.Queries.GetDummyEntityBy;
+using Controllers;
 using Core.Application;
 using HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands;
 using HybridDODArchitecture.Application.UseCases.AutomovilEntity.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-public class AutomovilController(ICommandQueryBus domain) : Controller
+public class AutomovilController(ICommandQueryBus domain) : BaseController
 {
-    private readonly ICommandQueryBus _domain = domain;
+    private readonly ICommandQueryBus _domain = domain ?? throw new ArgumentNullException(nameof(domain));
     // GET: AutomocilController
 
     [HttpGet("api/v1/[Controller]")]
@@ -33,7 +34,7 @@ public class AutomovilController(ICommandQueryBus domain) : Controller
         return Ok(entity);
     }
 
-    [HttpGet("api/v1/[Controller]/{Chasis}")]
+    [HttpGet("api/v1/[Controller]/chasis/{Chasis}")]
     public async Task<IActionResult> GetByChasis(string chasis)
     {
         if (string.IsNullOrEmpty(chasis)) return BadRequest();
@@ -44,13 +45,14 @@ public class AutomovilController(ICommandQueryBus domain) : Controller
     }
 
     [HttpPost("api/v1/[Controller]")]
-    public async Task<IActionResult> Create(CreateAutomovilCommand command)
+    public async Task<IActionResult> Create([FromBody] CreateAutomovilCommand command)
     {
-        if (command is null) return BadRequest();
+        if (!ModelState.IsValid) return ValidationProblem(ModelState);
 
         var id = await _domain.Send(command);
 
-        return Created($"api/[Controller]/{id}", new { Id = id });
+        // Asumiendo que tenés un GET /api/v1/automovil/{id}
+        return CreatedAtAction(nameof(GetById), new { id }, new { Id = id });
     }
 
     [HttpDelete("api/v1/[Controller]/{id}")]

@@ -17,31 +17,41 @@ namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
         private readonly IAutomovilApplivationService service = servicio ?? throw new ArgumentNullException( nameof(servicio));
         private readonly ICommandQueryBus _domainbus = domain ?? throw new ArgumentNullException(nameof(domain));
 
-       
+
 
         public async Task<string> Handle(CreateAutomovilCommand request, CancellationToken cancellationToken)
         {
-            Automovil entity = new(request.Color, request.NumeroMotor, request.Marca, request.NumeroChasis, request.Modelo, request.Fabricacion);
-            if(!entity.IsValid) throw new InvalidEntityDataException(entity.GetErrors());
+            var entity = new Automovil(
+                marca: request.Marca,
+                modelo: request.Modelo,
+                color: request.Color,
+                año_Fabrcacion: request.Fabricacion,
+                numero_Motor: request.NumeroMotor,
+                numero_Chasis: request.NumeroChasis
+            );
 
-            if (service.AutomovilExist(entity.Id)) throw new EntityDoesExistException();
+            if (!entity.IsValid) throw new InvalidEntityDataException(entity.GetErrors());
+
+            // Validar duplicados por CHASIS y/o MOTOR:
+            if (await repo.ExistsByChasisAsync(entity.Numero_Chasis))
+                throw new EntityDoesExistException("Ya existe un automóvil con ese número de chasis.");
+
+            if (await repo.ExistsByMotorAsync(entity.Numero_Motor))
+                throw new EntityDoesExistException("Ya existe un automóvil con ese número de motor.");
 
             try
             {
-                object createdId = await repo.AddAsync(entity);
-
+                var createdId = await repo.AddAsync(entity);
                 await _domainbus.Publish(entity.To<AutomovilCreate>(), cancellationToken);
-
                 return createdId.ToString();
             }
             catch (Exception ex)
             {
-                throw new BussinessException(ApplicationConstants.PROCESS_EXECUTION_EXCEPTION, ex.InnerException);
+                // Usá ex (no ex.InnerException que puede ser null)
+                throw new BussinessException(ApplicationConstants.PROCESS_EXECUTION_EXCEPTION, ex);
             }
-
-
         }
 
-        
+
     }
 }

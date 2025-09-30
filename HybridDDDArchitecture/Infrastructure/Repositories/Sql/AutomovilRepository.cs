@@ -12,14 +12,25 @@ namespace Infrastructure.Repositories.Sql
 {
     internal sealed class AutomovilRepository(StoreDbContext context) : BaseRepository<Automovil>(context), IAutomovilRepository
     {
-        public Task<IEnumerable<Automovil>> GetallAsync()
+        public async Task<bool> ExistsByChasisAsync(string numeroChasis)
+       => await Context.Set<Automovil>()
+                       .AnyAsync(a => a.Numero_Chasis == numeroChasis);
+
+
+        public async Task<bool> ExistsByMotorAsync(string numeroMotor)
+        => await Context.Set<Automovil>()
+                        .AnyAsync(a => a.Numero_Motor == numeroMotor);
+
+        public async Task<IEnumerable<Automovil>> GetallAsync()
         {
-            throw new NotImplementedException();
+            return await Context.Set<Automovil>().AsNoTracking().ToListAsync();
         }
 
         public async Task<Automovil> GetByChasisAync(string numeroChasis)
         {
-         return await Context.Set<Automovil>().FirstOrDefaultAsync(a => a.Numero_Chasis== numeroChasis);
+            return await Context.Set<Automovil>()
+             .AsNoTracking()
+             .FirstOrDefaultAsync(a => a.Numero_Chasis == numeroChasis);
 
 
         }

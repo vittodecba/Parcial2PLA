@@ -20,6 +20,11 @@ namespace Application.Mappings
             CreateMap<Automovil,AutomovilDelete>().ReverseMap();
             CreateMap<Automovil,AutomovilEntityUpdate>().ReverseMap();
             CreateMap<Automovil , AutomovilCreate>().ReverseMap();
+            CreateMap<Automovil, AutomovilDto>().ReverseMap();
+            // arriba ya tenés otros CreateMap...
+            CreateMap<Automovil, AutomovilDto>().ReverseMap();
+
+
         }
     }
 }

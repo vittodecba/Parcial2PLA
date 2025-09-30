@@ -14,7 +14,16 @@ namespace Application.ApplicationServices
       
         public bool AutomovilExist(object value)
         {
-            throw new NotImplementedException();
+            var s = value?.ToString();
+            if (string.IsNullOrWhiteSpace(s)) return false;
+
+            // si envías chasis: true si ya existe
+            var existsByChasis = _context.ExistsByChasisAsync(s).GetAwaiter().GetResult();
+            if (existsByChasis) return true;
+
+            // si envías motor: true si ya existe
+            var existsByMotor = _context.ExistsByMotorAsync(s).GetAwaiter().GetResult();
+            return existsByMotor;
         }
     }
 }

@@ -8,7 +8,7 @@ using MediatR;
 namespace HybridDODArchitecture.Application.UseCases.AutomovilEntity.Commands
 {
     public sealed class DeleteAutomovilCommandHandler
-        : IRequestCommandHandler<DeleteDummyEntityCommand, Unit>
+        : IRequestCommandHandler<DeleteAutomovilCommand, Unit>
     {
         private readonly IAutomovilRepository _automovilRepository;
         private readonly ICommandQueryBus _domainbus;
